@@ -1,0 +1,16 @@
+{
+  "name": "freezsmart",
+  "version": "1.0.0",
+  "description": "FreezeSmart Web",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Isuru Buddhika Pathirana",
+  "license": "MIT",
+  "dependencies": {
+    "express": "^4.14.0",
+    "nodemon": "^1.10.0",
+    "pug": "^2.0.0-beta4"
+  }
+}
