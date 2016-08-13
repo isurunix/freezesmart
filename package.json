@@ -8,8 +8,9 @@
   },
   "author": "Isuru Buddhika Pathirana",
   "license": "MIT",
-  "repository":"https://github.com/isurunix/freezesmart.git",
+  "repository": "https://github.com/isurunix/freezesmart.git",
   "dependencies": {
+    "body-parser": "^1.15.2",
     "express": "^4.14.0",
     "nodemon": "^1.10.0",
     "pug": "^2.0.0-beta4"
