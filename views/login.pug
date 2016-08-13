@@ -1,20 +1,27 @@
 extends layout.pug
 
 block content
-
-  if status=='failed'
-    .container.center.col-lg-4
-        .alert.alert-danger.alert-dismissable(role='alert')
-          button.close(type='button', data-dismiss='alert', aria-label='close')
-            span(aria-hidden='true') &times;
-          <strong>Login Failed! </strong> Username or Password incorrect
-
   .container.center(style='padding-top:5%;')
     .row
       #login.col-lg-6.center
         form#loginForm(action='login', method='post')
           .span7.text-center(style='padding-bottom:20px')
             h3 Login to your FreezSmart account
+            if status=='failed'
+              .alert.alert-danger.alert-dismissable(role='alert')
+                button.close(type='button', data-dismiss='alert', aria-label='close')
+                <strong>Login Failed! </strong> Username or Password incorrect
+            else if(status=='success')
+              .alert.alert-success.alert-dismissable(role='alert')
+                button.close(type='button', data-dismiss='alert', aria-label='close')
+                <strong>Login success! </strong> Redirecting to your dashboard
+                script.
+                  setTimeout(function(){window.location.assign('/dashboard')},1000);
+            else
+              .alert.alert-danger.alert-dismissable(role='alert',style='visibility:hidden')
+                button.close(type='button', data-dismiss='alert', aria-label='close')
+                <strong>Login Failed! </strong> Username or Password incorrect
+
           input.form-control(required , autofocus , placeholder='Username', type='text', name='uname')
           br
           input.form-control(required type='password', placeholder='Password', name='pwd')

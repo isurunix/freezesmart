@@ -34,12 +34,12 @@ html(lang='en')
           if titlePrefix==="Home"
             ul.nav.navbar-nav.navbar-right
               li
-                a(href='./login')
+                a(href='/login')
                   span.glyphicon.glyphicon-log-in  Login
           else if titlePrefix==="Dashboard"
             ul.nav.navbar-nav.navbar-right
               li
-                a(href='/')
-                  span.glyphicon.glyphicon-log-in  Logout
+                a(href='/logout')
+                  span.glyphicon.glyphicon-log-out  Logout
 
     block content
