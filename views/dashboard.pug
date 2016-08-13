@@ -1,7 +1,28 @@
 extends layout.pug
 
 block content
-  .container(style='padding-top:10%')
-    .col-lg-4
-      .row
-        p Sample
+  .container-fluid
+    .row
+      .col-md-2.well(style='position:fixed')
+          ul.nav
+            li
+              a(href='#') Link1
+            li
+              a(href='#') Link2
+
+      .col-md-10.col-md-offset-2(style='padding:20px')
+        table.table.table-responsive.table-striped.table-bordered
+          thead
+            tr
+              th Item
+              th Count
+              th Expire Date
+          tbody
+            tr
+              td Egg
+              td 10
+              td n/a
+            tr
+              td Coca-Cola
+              td 5
+              td 2017-08-12

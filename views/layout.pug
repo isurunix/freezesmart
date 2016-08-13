@@ -1,7 +1,7 @@
 doctype html
 html(lang='en')
   head
-    title=titlePrefix+'- FreezeSmart'
+    title=titlePrefix+' - FreezeSmart'
     meta(charset='utf-8')
     meta(name='viewport', content='width=device-width, initial-scale=1')
     //- link(rel='stylesheet', href='./assets/css/bootstrap.min.css')
@@ -23,13 +23,23 @@ html(lang='en')
           a.navbar-brand(href='#') FreezSmart
         #myNavbar.collapse.navbar-collapse
           ul.nav.navbar-nav
-            li.active
-              a(href='/') Home
+            if titlePrefix==="Home"
+              li.active
+                a(href='/') Home
+            else
+              li
+                a(href='/') Home
             li
               a(href='#') About
-          ul.nav.navbar-nav.navbar-right
-            li
-              a(href='./login')
-                span.glyphicon.glyphicon-log-in  Login
+          if titlePrefix==="Home"
+            ul.nav.navbar-nav.navbar-right
+              li
+                a(href='./login')
+                  span.glyphicon.glyphicon-log-in  Login
+          else if titlePrefix==="Dashboard"
+            ul.nav.navbar-nav.navbar-right
+              li
+                a(href='/')
+                  span.glyphicon.glyphicon-log-in  Logout
 
     block content
