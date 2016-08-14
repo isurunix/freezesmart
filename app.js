@@ -2,8 +2,11 @@ var express = require('express');
 var path = require('path');
 var bodyParser = require('body-parser');
 var session = require('express-session');
+var mongoose = require('mongoose');
 var passport = require('./auth');
 var app = express();
+
+
 
 app.use(express.static( path.join(__dirname, 'views')));
 app.use(bodyParser.urlencoded({extended:false}));
@@ -32,20 +35,38 @@ app.get('/login', function(req,res){
   }
 });
 
+// app.post('/login',function(req,res){
+//   var sess = req.session;
+//   var uname = req.body.uname;
+//   var pwd = req.body.pwd;
+//   console.log('POST /login {'+uname+','+pwd+'}');
+//   var authenticated = passport.auth(uname,pwd);
+//   console.log("auth:"+authenticated);
+//   if(authenticated){
+//     sess.isLogged=true;
+//     sess.uname=uname;
+//     sess.pwd=pwd;
+//     res.render('login',{ titlePrefix: 'Login', status:'success'});
+//   }else{
+//     res.render('login',{ titlePrefix: 'Login', status:'failed'});
+//   }
+// });
+
 app.post('/login',function(req,res){
   var sess = req.session;
   var uname = req.body.uname;
   var pwd = req.body.pwd;
   console.log('POST /login {'+uname+','+pwd+'}');
-  var authenticated = passport.auth(uname,pwd);
-  if(authenticated){
-    sess.isLogged=true;
-    sess.uname=uname;
-    sess.pwd=pwd;
-    res.render('login',{ titlePrefix: 'Login', status:'success'});
-  }else{
-    res.render('login',{ titlePrefix: 'Login', status:'failed'});
-  }
+  var authenticated = passport.auth(uname,pwd,function(err,user){
+    if(user!=null){
+      sess.isLogged=true;
+      sess.uname=uname;
+      sess.pwd=pwd;
+      res.render('login',{ titlePrefix: 'Login', status:'success'});
+    }else{
+      res.render('login',{ titlePrefix: 'Login', status:'failed'});
+    }
+  });
 });
 
 app.get('/logout',function(req,res){

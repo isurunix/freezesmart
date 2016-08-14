@@ -1,7 +1,7 @@
+var db = require('./db');
 
-var authenticate = function(uname,pwd){
-  if(uname==='isuru' && pwd=='isuru') return true;
-  return false;
+var authenticate = function(uname,pwd,callback){
+  db.getUser(uname,pwd,callback);
 }
 
 exports.auth = authenticate;
