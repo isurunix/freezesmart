@@ -25,8 +25,8 @@ var getLastSnapUpdate = function(uid,callback){
     if(err) return console.error(err);
     return results;
   });
-  console.log(docs);
 }
 
-getLastSnapUpdate("default_usr");
+var s = getLastSnapUpdate("default_usr");
+console.log(s);
 module.exports.getUser = getUser;

@@ -1,13 +1,14 @@
 var express = require('express');
+var favicon = require('serve-favicon');
 var path = require('path');
 var bodyParser = require('body-parser');
 var session = require('express-session');
 var mongoose = require('mongoose');
 var passport = require('./auth');
+var snap = require('./models/snap');
 var app = express();
 
-
-
+app.use(favicon(path.join(__dirname,'views','assets','img','favicon.ico')));
 app.use(express.static( path.join(__dirname, 'views')));
 app.use(bodyParser.urlencoded({extended:false}));
 app.use(bodyParser.json());
@@ -83,7 +84,15 @@ app.get('/dashboard',function(req,res){
   console.log('GET /dashboard');
   var sess = req.session;
   if(sess.isLogged){
-    res.render('dashboard',{ titlePrefix: 'Dashboard', isLogged:'success'});
+    var uid = sess.uname;
+    snap.find({user:uid}).sort({_id:-1}).limit(1).exec(function(err,doc){
+      if(err) return console.error(err);
+      console.log(doc);
+      var items = doc[0].items;
+      console.log(items);
+      res.render('dashboard',{ titlePrefix: 'Dashboard', isLogged:'success', data:items});
+    });
+    // res.render('dashboard',{ titlePrefix: 'Dashboard', isLogged:'success'});
   }else{
     res.redirect('/');
   }

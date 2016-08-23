@@ -1,28 +1,34 @@
 extends layout.pug
 
 block content
-  .container-fluid
-    .row
-      .col-md-2.well(style='position:fixed')
-          ul.nav
-            li
-              a(href='#') Link1
-            li
-              a(href='#') Link2
+  //- .container-fluid(style='position:absolute')
+  //-   .col-sm-2.col-md-2
+  //-       nav.navbar-default
+  //-         .container-fluid
+  //-           .navbar-header
+  //-             button.navbar-toggle(type='button', data-toggle='collapse', data-target='#sidebar')
+  //-               span.icon-bar
+  //-               span.icon-bar
+  //-               span.icon-bar
+  //-             a.navbar-brand(href='#') Dashboard
+  //-         #sidebar.collapse.navbar-collapse
+  //-           ul.nav
+  //-             li
+  //-               a(href='#') Link1
+  //-             li
+  //-               a(href='#') Link2
 
-      .col-md-10.col-md-offset-2
-        table.table.table-responsive.table-striped.table-bordered(style='position:fixed')
-          thead
-            tr
-              th Item
-              th Count
-              th Expire Date
-          tbody
-            tr
-              td Egg
-              td 10
-              td n/a
-            tr
-              td Coca-Cola
-              td 5
-              td 2017-08-12
+  .container-fluid
+    .col-sm-12.col-sm-offset-0.col-md-12.col-md-offset-0
+      table.table.table-responsive.table-bordered(style='background-color:white')
+        thead
+          tr
+            th Item
+            th Count
+            th Expire Date
+        tbody
+              each item in data
+                tr
+                  td=item.name
+                  td=item.qty
+                  td=(item.exp.getDate()+'-'+(item.exp.getMonth()+1)+'-'+item.exp.getFullYear())
