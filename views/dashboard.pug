@@ -19,16 +19,28 @@ block content
   //-               a(href='#') Link2
 
   .container-fluid
-    .col-sm-12.col-sm-offset-0.col-md-12.col-md-offset-0
-      table.table.table-responsive.table-bordered(style='background-color:white')
-        thead
+    .col-sm-12.col-sm-offset-0.col-md-12.col-md-offset-0.well
+      table.table.table-responsive(style='background:white')
+        col(width='40%')
+        col(width='10%')
+        col(width='25%')
+        col(width='25%')
+        thead(halign='center')
           tr
             th Item
             th Count
             th Expire Date
+            th Comment
         tbody
               each item in data
-                tr
-                  td=item.name
-                  td=item.qty
-                  td=(item.exp.getDate()+'-'+(item.exp.getMonth()+1)+'-'+item.exp.getFullYear())
+                if(((item.exp - (new Date()))/86400000)<14)
+                  tr(style='background:#a2110d; color:#ffffff')
+                    td=item.name
+                    td=item.qty
+                    td=(item.exp.getDate()+'-'+(item.exp.getMonth()+1)+'-'+item.exp.getFullYear())
+                    td='About to Expire'
+                else
+                  tr
+                    td=item.name
+                    td=item.qty
+                    td=(item.exp.getDate()+'-'+(item.exp.getMonth()+1)+'-'+item.exp.getFullYear())
